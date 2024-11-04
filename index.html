@@ -11,7 +11,7 @@
     <!-- Open Graph Meta Tags for Social Media -->
     <meta property="og:title" content="StikTech - Innovative Development Projects by Stephen">
     <meta property="og:description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
-    <meta property="og:image" content="https://stik.tech/images/og-image.jpg">
+    <meta property="og:image" content="https://stik.tech/images/og-image.webp">
     <meta property="og:url" content="https://stik.tech">
     <meta property="og:type" content="website">
     
@@ -19,7 +19,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="StikTech - Innovative Development Projects by Stephen">
     <meta name="twitter:description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
-    <meta name="twitter:image" content="https://stik.tech/images/twitter-image.jpg">
+    <meta name="twitter:image" content="https://stik.tech/images/twitter-image.webp">
     
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +42,7 @@
             "@type": "Person",
             "name": "Stephen",
             "url": "https://stik.tech/about"
-        },
+        }
     }
     </script>
     
@@ -126,7 +126,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('https://stik.tech/images/hero.jpg') no-repeat center center/cover;
+            background: url('https://stik.tech/images/hero.webp') no-repeat center center/cover;
             color: #fff;
             text-align: center;
             position: relative;
@@ -432,7 +432,27 @@
                 <div class="project-list">
                     <!-- Project 1 -->
                     <article class="project-item" itemscope itemtype="https://schema.org/SoftwareApplication">
-                        <img src="https://stik.tech/StikDoodle.png" alt="StikDoodle - A Sketching App" loading="lazy">
+                        <picture>
+                            <source type="image/webp" 
+                                    srcset="
+                                        https://stik.tech/images/StikDoodle-small.webp 600w,
+                                        https://stik.tech/images/StikDoodle-medium.webp 1200w,
+                                        https://stik.tech/images/StikDoodle-large.webp 2400w"
+                                    sizes="(max-width: 600px) 100vw, 
+                                           (max-width: 1200px) 50vw, 
+                                           33vw">
+                            <source type="image/png" 
+                                    srcset="
+                                        https://stik.tech/images/StikDoodle-small.png 600w,
+                                        https://stik.tech/images/StikDoodle-medium.png 1200w,
+                                        https://stik.tech/images/StikDoodle-large.png 2400w"
+                                    sizes="(max-width: 600px) 100vw, 
+                                           (max-width: 1200px) 50vw, 
+                                           33vw">
+                            <img src="https://stik.tech/images/StikDoodle-large.webp" 
+                                 alt="StikDoodle - A Sketching App" 
+                                 loading="lazy">
+                        </picture>
                         <div class="project-content">
                             <h3 itemprop="name">StikDoodle</h3>
                             <p itemprop="description">Discover the joy of drawing with StikDoodle, the ultimate sketching app designed for both beginners and professionals. Whether you're jotting down ideas, doodling for fun, or creating detailed artwork, StikDoodle provides a seamless and intuitive experience.</p>
@@ -441,7 +461,27 @@
                     </article>
                     <!-- Project 2 -->
                     <article class="project-item" itemscope itemtype="https://schema.org/SoftwareApplication">
-                        <img src="https://stik.tech/StikRift.png" alt="StikRift - Space Arcade Shooter" loading="lazy">
+                        <picture>
+                            <source type="image/webp" 
+                                    srcset="
+                                        https://stik.tech/images/StikRift-small.webp 600w,
+                                        https://stik.tech/images/StikRift-medium.webp 1200w,
+                                        https://stik.tech/images/StikRift-large.webp 2400w"
+                                    sizes="(max-width: 600px) 100vw, 
+                                           (max-width: 1200px) 50vw, 
+                                           33vw">
+                            <source type="image/png" 
+                                    srcset="
+                                        https://stik.tech/images/StikRift-small.png 600w,
+                                        https://stik.tech/images/StikRift-medium.png 1200w,
+                                        https://stik.tech/images/StikRift-large.png 2400w"
+                                    sizes="(max-width: 600px) 100vw, 
+                                           (max-width: 1200px) 50vw, 
+                                           33vw">
+                            <img src="https://stik.tech/images/StikRift-large.webp" 
+                                 alt="StikRift - Space Arcade Shooter" 
+                                 loading="lazy">
+                        </picture>
                         <div class="project-content">
                             <h3 itemprop="name">StikRift</h3>
                             <p itemprop="description">StikRift is a thrilling space arcade shooter where you fight against waves of enemies, collect power-ups, and take on powerful bosses. With multiple levels, unique enemies, and special abilities, StikRift offers non-stop action and excitement.</p>
@@ -466,24 +506,39 @@
         <!-- Terms of Service Section -->
         <section id="tos" class="tos" aria-labelledby="tos-heading">
             <div class="container">
-            <h2 id="tos-heading">StikTech Privacy Policy</h2>
-            <div class="tos-content">
-            <h3>Effective Date: 11/04/24</h3>
-            <h3>Your Privacy</h3>
-            <p>StikTech respects your privacy. We don’t directly collect any personal data when you use our apps.</p>
+                <h2 id="tos-heading">StikTech Privacy Policy</h2>
+                <div class="tos-content">
+                    <h3>Effective Date: 11/04/24</h3>
+                    <h3>Your Privacy</h3>
+                    <p>StikTech respects your privacy. We don’t directly collect any personal data when you use our apps.</p>
 
-            <h3>Data Collection</h3>
-            <p>StikTech does not directly collect or store any personal information from its users.</p>
+                    <h3>Data Collection</h3>
+                    <p>StikTech does not directly collect or store any personal information from its users.</p>
 
-            <h3>Policy Updates</h3>
-            <p>If we make changes to this policy, we’ll update it here. Please check back for any updates.</p>
+                    <h3>Policy Updates</h3>
+                    <p>If we make changes to this policy, we’ll update it here. Please check back for any updates.</p>
 
-            <h3>Contact Us</h3>
-            <p>Questions? Reach out to us at <a href="mailto:stephen@blustik.com">stephen@blustik.com</a>.</p>
-            </div>
+                    <h3>Contact Us</h3>
+                    <p>Questions? Reach out to us at <a href="mailto:stephen@blustik.com">stephen@blustik.com</a>.</p>
+                </div>
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 StikTech. All rights reserved.</p>
+            <nav aria-label="Footer Navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#tos">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
 
     <!-- JavaScript for Active Navigation Link -->
     <script>
