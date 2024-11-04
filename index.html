@@ -2,8 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    <!-- Primary Meta Tags -->
+    <title>StikTech - Innovative Development Projects by Stephen</title>
+    <meta name="description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
+    <meta name="keywords" content="StikTech, Stephen's Development Projects, StikDoodle, StikRift, SwiftUI Developer, App Development, NES Emulator, Drawing App">
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="StikTech - Innovative Development Projects by Stephen">
+    <meta property="og:description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:url" content="https://www.stiktech.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="StikTech - Innovative Development Projects by Stephen">
+    <meta name="twitter:description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
+    <meta name="twitter:image" content="images/twitter-image.jpg">
+    
+    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StikTech - Stephen's Development Projects</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.stiktech.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "StikTech",
+        "url": "https://www.stiktech.com",
+        "description": "Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift.",
+        "author": {
+            "@type": "Person",
+            "name": "Stephen",
+            "url": "https://www.stiktech.com/about"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/in/stephen",
+            "https://github.com/stephen",
+            "https://twitter.com/stiktech"
+        ]
+    }
+    </script>
+    
+    <!-- Styles -->
     <style>
         /* Reset and Base Styles */
         * {
@@ -103,7 +151,7 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+                max-width: 800px;
             padding: 20px;
         }
 
@@ -222,6 +270,23 @@
             color: #777;
         }
 
+        footer nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        footer nav ul li a {
+            color: #777;
+            transition: color 0.3s ease;
+        }
+
+        footer nav ul li a:hover {
+            color: #0071e3;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -246,69 +311,82 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <nav>
-                <div class="logo">StikTech</div>
+            <nav aria-label="Main Navigation">
+                <div class="logo"><a href="/" aria-label="StikTech Home">StikTech</a></div>
                 <ul>
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="/contact" aria-label="Contact Stephen">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section (Home) -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to StikTech</h1>
-            <p>Showcasing Stephen's Development Projects</p>
-            <a href="#projects" class="btn">View Projects</a>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <h2>Coming Soon</h2>
-        </div>
-        <!---
-        <div class="container">
-            <h2>My Projects</h2>
-            <div class="project-list">
-                <!-- Project 1 -->
-       <!--- <h1>Coming Soon</h1>
-                <div class="project-item">
-                    <img src="images/project1.jpg" alt="Project One Screenshot">
-                    <div class="project-content">
-                        <h3>Project One</h3>
-                        <p>A brief description of Project One. This project involves [details about the project].</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-             <!---   <div class="project-item">
-                    <img src="images/project2.jpg" alt="Project Two Screenshot">
-                    <div class="project-content">
-                        <h3>Project Two</h3>
-                        <p>A brief description of Project Two. This project focuses on [details about the project].</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <!-- Add more projects as needed -->
-         <!---   </div>
-        </div> -->
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Stephen</h2>
-            <div class="about-content">
-                <p>Stephen is a passionate developer with expertise in Swift & SwiftUI. He has worked on various projects ranging from a NES emulator to a drawing app. His mission is to make apps that make life easier.</p>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section (Home) -->
+        <section id="home" class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">Welcome to StikTech</h1>
+                <p>Showcasing Stephen's Development Projects</p>
+                <a href="#projects" class="btn" aria-label="View Projects">View Projects</a>
             </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects" aria-labelledby="projects-heading">
+            <div class="container">
+                <h2 id="projects-heading">My Projects</h2>
+                <div class="project-list">
+                    <!-- Project 1 -->
+                    <article class="project-item" itemscope itemtype="https://schema.org/SoftwareApplication">
+                        <img src="images/StikDoodle.png" alt="StikDoodle - A Sketching App" loading="lazy">
+                        <div class="project-content">
+                            <h3 itemprop="name">StikDoodle</h3>
+                            <p itemprop="description">Discover the joy of drawing with StikDoodle, the ultimate sketching app designed for both beginners and professionals. Whether you're jotting down ideas, doodling for fun, or creating detailed artwork, StikDoodle provides a seamless and intuitive experience.</p>
+                            <a href="https://apps.apple.com/us/app/stikdoodle/id6733226657" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Get StikDoodle on the App Store">Get</a>
+                        </div>
+                    </article>
+                    <!-- Project 2 -->
+                    <article class="project-item" itemscope itemtype="https://schema.org/SoftwareApplication">
+                        <img src="images/StikRift.png" alt="StikRift - Space Arcade Shooter" loading="lazy">
+                        <div class="project-content">
+                            <h3 itemprop="name">StikRift</h3>
+                            <p itemprop="description">StikRift is a thrilling space arcade shooter where you fight against waves of enemies, collect power-ups, and take on powerful bosses. With multiple levels, unique enemies, and special abilities, StikRift offers non-stop action and excitement.</p>
+                            <a href="https://apps.apple.com/us/app/stikrift-space-arcade-shooter/id6670796617" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Get StikRift on the App Store">Get</a>
+                        </div>
+                    </article>
+                    <!-- Add more projects as needed -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about" aria-labelledby="about-heading">
+            <div class="container">
+                <h2 id="about-heading">About Stephen</h2>
+                <div class="about-content">
+                    <p>Stephen is a passionate developer with expertise in Swift &amp; SwiftUI. He has worked on various projects ranging from a NES emulator to a drawing app. His mission is to make apps that make life easier.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 StikTech. All rights reserved.</p>
+            <nav aria-label="Footer Navigation">
+                <ul>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms-of-service">Terms of Service</a></li>
+                    <li><a href="/sitemap">Sitemap</a></li>
+                </ul>
+            </nav>
         </div>
-    </section>
+    </footer>
+
     <!-- JavaScript for Active Navigation Link -->
     <script>
         // Highlight active navigation link based on scroll position
