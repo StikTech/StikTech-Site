@@ -11,24 +11,24 @@
     <!-- Open Graph Meta Tags for Social Media -->
     <meta property="og:title" content="StikTech - Innovative Development Projects by Stephen">
     <meta property="og:description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
-    <meta property="og:image" content="images/og-image.jpg">
-    <meta property="og:url" content="https://stiktech.com">
+    <meta property="og:image" content="https://stik.tech/images/og-image.jpg">
+    <meta property="og:url" content="https://stik.tech">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="StikTech - Innovative Development Projects by Stephen">
     <meta name="twitter:description" content="Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift. Discover apps that make life easier and more enjoyable.">
-    <meta name="twitter:image" content="images/twitter-image.jpg">
+    <meta name="twitter:image" content="https://stik.tech/images/twitter-image.jpg">
     
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://stiktech.com">
+    <link rel="canonical" href="https://stik.tech">
     
     <!-- Favicon -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://stik.tech/images/favicon.ico" type="image/x-icon">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -36,13 +36,18 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "StikTech",
-        "url": "https://stiktech.com",
+        "url": "https://stik.tech",
         "description": "Explore StikTech, featuring Stephen's innovative development projects including StikDoodle and StikRift.",
         "author": {
             "@type": "Person",
             "name": "Stephen",
-            "url": "https://stiktech.com/about"
+            "url": "https://stik.tech/about"
         },
+        "sameAs": [
+            "https://www.linkedin.com/in/stephen",
+            "https://github.com/stephen",
+            "https://twitter.com/stiktech"
+        ]
     }
     </script>
     
@@ -126,7 +131,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('images/hero.jpg') no-repeat center center/cover;
+            background: url('https://stik.tech/images/hero.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
             position: relative;
@@ -146,7 +151,7 @@
         .hero-content {
             position: relative;
             z-index: 1;
-                max-width: 800px;
+            max-width: 800px;
             padding: 20px;
         }
 
@@ -256,6 +261,96 @@
             line-height: 1.8;
         }
 
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .contact-form button {
+            padding: 12px 30px;
+            background-color: #0071e3;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Terms of Service Section */
+        .tos {
+            padding: 80px 0;
+        }
+
+        .tos h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .tos-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .tos-content h3 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .tos-content p,
+        .tos-content ul {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tos-content ul {
+            list-style: disc inside;
+        }
+
         /* Footer */
         footer {
             background-color: #f0f0f0;
@@ -299,6 +394,12 @@
             .project-item img {
                 height: 150px;
             }
+
+            .contact-form button,
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -307,12 +408,13 @@
     <header>
         <div class="container">
             <nav aria-label="Main Navigation">
-                <div class="logo"><a href="/" aria-label="StikTech Home">StikTech</a></div>
+                <div class="logo"><a href="#home" aria-label="StikTech Home">StikTech</a></div>
                 <ul>
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="/contact" aria-label="Contact Stephen">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#tos">Terms of Service</a></li>
                 </ul>
             </nav>
         </div>
@@ -336,7 +438,7 @@
                 <div class="project-list">
                     <!-- Project 1 -->
                     <article class="project-item" itemscope itemtype="https://schema.org/SoftwareApplication">
-                        <img src="images/StikDoodle.png" alt="StikDoodle - A Sketching App" loading="lazy">
+                        <img src="https://stik.tech/images/StikDoodle.png" alt="StikDoodle - A Sketching App" loading="lazy">
                         <div class="project-content">
                             <h3 itemprop="name">StikDoodle</h3>
                             <p itemprop="description">Discover the joy of drawing with StikDoodle, the ultimate sketching app designed for both beginners and professionals. Whether you're jotting down ideas, doodling for fun, or creating detailed artwork, StikDoodle provides a seamless and intuitive experience.</p>
@@ -345,7 +447,7 @@
                     </article>
                     <!-- Project 2 -->
                     <article class="project-item" itemscope itemtype="https://schema.org/SoftwareApplication">
-                        <img src="images/StikRift.png" alt="StikRift - Space Arcade Shooter" loading="lazy">
+                        <img src="https://stik.tech/images/StikRift.png" alt="StikRift - Space Arcade Shooter" loading="lazy">
                         <div class="project-content">
                             <h3 itemprop="name">StikRift</h3>
                             <p itemprop="description">StikRift is a thrilling space arcade shooter where you fight against waves of enemies, collect power-ups, and take on powerful bosses. With multiple levels, unique enemies, and special abilities, StikRift offers non-stop action and excitement.</p>
@@ -366,6 +468,64 @@
                 </div>
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact" aria-labelledby="contact-heading">
+            <div class="container">
+                <h2 id="contact-heading">Contact Me</h2>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/maykvyyp" method="POST">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="_replyto" required>
+
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms of Service Section -->
+        <section id="tos" class="tos" aria-labelledby="tos-heading">
+            <div class="container">
+                <h2 id="tos-heading">Terms of Service</h2>
+                <div class="tos-content">
+                    <p>Welcome to StikTech! These terms and conditions outline the rules and regulations for the use of StikTech's Website.</p>
+
+                    <h3>1. Introduction</h3>
+                    <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use StikTech if you do not agree to take all of the terms and conditions stated on this page.</p>
+
+                    <h3>2. No Data Collection</h3>
+                    <p>At StikTech, we respect your privacy. We do not directly collect any personal data from our users. Any data you may provide through interactions on the website is handled securely and is not stored or processed by us.</p>
+
+                    <h3>3. Intellectual Property</h3>
+                    <p>Unless otherwise stated, StikTech and/or its licensors own the intellectual property rights for all material on the website. All intellectual property rights are reserved. You may access this from StikTech for your own personal use subjected to restrictions set in these terms and conditions.</p>
+
+                    <h3>4. Restrictions</h3>
+                    <p>You are specifically restricted from all of the following:</p>
+                    <ul>
+                        <li>Publishing any Website material in any other media.</li>
+                        <li>Selling, sublicensing and/or otherwise commercializing any Website material.</li>
+                        <li>Using this Website in any way that is or may be damaging to this Website.</li>
+                        <li>Using this Website in any way that impacts user access to this Website.</li>
+                        <li>Using this Website contrary to applicable laws and regulations.</li>
+                    </ul>
+
+                    <h3>5. Limitation of Liability</h3>
+                    <p>In no event shall StikTech, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website.</p>
+
+                    <h3>6. Governing Law</h3>
+                    <p>These Terms will be governed by and interpreted in accordance with the laws of the State, and you submit to the non-exclusive jurisdiction of the state and federal courts located in the State for the resolution of any disputes.</p>
+
+                    <p>Thank you for visiting StikTech!</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -374,9 +534,9 @@
             <p>&copy; 2024 StikTech. All rights reserved.</p>
             <nav aria-label="Footer Navigation">
                 <ul>
-                    <li><a href="/privacy-policy">Privacy Policy</a></li>
-                    <li><a href="/terms-of-service">Terms of Service</a></li>
-                    <li><a href="/sitemap">Sitemap</a></li>
+                    <li><a href="#tos">Terms of Service</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#sitemap">Sitemap</a></li>
                 </ul>
             </nav>
         </div>
