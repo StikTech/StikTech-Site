@@ -5,6 +5,11 @@
         "iconURL": "https://raw.githubusercontent.com/OatmealDome/dolphin-ios/5a13030332a897f1093a32c2fdc6a9b216882329/Source/iOS/App/DolphiniOS/Assets.xcassets/AppIcon.appiconset/ios_marketing1024x1024.png"
     },
     {
+        "name": "UTM",
+        "ipaURL": "https://github.com/utmapp/UTM/releases/download/v4.5.4/UTM.ipa",
+        "iconURL": "https://raw.githubusercontent.com/utmapp/UTM/refs/tags/v4.5.4/Platform/Assets.xcassets/AppIcon.appiconset/Icon.png"
+    },
+    {
         "name": "DolphiniOS",
         "ipaURL": "https://github.com/OatmealDome/dolphin-ios/releases/download/v4.0.0b7/Non-Jailbroken.ipa",
         "iconURL": "https://raw.githubusercontent.com/brandonplank/flappybird/refs/heads/main/Flappy%20Bird/Assets.xcassets/AppIcon.appiconset/1024.png"
