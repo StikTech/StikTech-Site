@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Flappy Bird",
+        "ipaURL": "https://example.com/flappybird.ipa",
+        "iconURL": "https://example.com/flappybird.png"
+    },
+    {
+        "name": "DolphiniOS",
+        "ipaURL": "https://example.com/dolphinios.ipa",
+        "iconURL": "https://example.com/dolphinios.png"
+    }
+]
