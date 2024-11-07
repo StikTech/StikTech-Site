@@ -12,6 +12,6 @@
     {
         "name": "UTM",
         "ipaURL": "https://github.com/utmapp/UTM/releases/download/v4.5.4/UTM.ipa",
-        "iconURL": "https://raw.githubusercontent.com/utmapp/UTM/main/Platform/Assets.xcassets/AppIcon.appiconset/Icon.png"
+        "iconURL": "https://raw.githubusercontent.com/utmapp/UTM/refs/tags/v4.5.4/Platform/Assets.xcassets/AppIcon.appiconset/Icon.png"
     }
 ]
