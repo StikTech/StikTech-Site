@@ -23,5 +23,10 @@
         "name": "Stossycord",
         "ipaURL": "https://github.com/Stossycord/Stossycord/releases/download/0.3/Stossycord.ipa",
         "iconURL": "https://avatars.githubusercontent.com/u/172116843?s=200&v=4"
+    },
+    {
+        "name": "nyCounter",
+        "ipaURL": "https://nythepegas.us/counter/nyCounter.ipa",
+        "iconURL": "https://raw.githubusercontent.com/nythepegasus/nyCounter/d3f4999e4e9956cfd5f9d8f4a4f8447169b8162c/counter/Misc/Assets/Assets.xcassets/AppIcon.appiconset/nyCounter.png"
     }
 ]
