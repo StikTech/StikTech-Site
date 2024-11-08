@@ -18,5 +18,10 @@
         "name": "Provenance (2.30 XL)",
         "ipaURL": "https://download2300.mediafire.com/960il8ybretgI94T2N8DEAQENFi_QTirl4sKPXfw3-Oy0TC_QnL4q4q8HdnffPpIPElUNSIEHAF306bCPd55YJ1f-BuJKsXYzbHdUZ_5h0JzfbDJpG_x9VTCjLeu4NT5pzUBSYMGLnN8LqP7t7AcjMVuDParZ8HXU4xni2FWO88/6pwapm4hlbzblem/Provenance-XL.ipa",
         "iconURL": "https://raw.githubusercontent.com/Provenance-Emu/Provenance/4ae58e005bc60ceb96228026d69526b6ada1514a/Provenance/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon512x512.png"
+    },
+    {
+        "name": "Stossycord",
+        "ipaURL": "https://github.com/Stossycord/Stossycord/releases/download/0.3/Stossycord.ipa",
+        "iconURL": "https://avatars.githubusercontent.com/u/172116843?s=200&v=4"
     }
 ]
