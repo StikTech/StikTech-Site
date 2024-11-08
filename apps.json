@@ -1,1 +1,32 @@
-
+[
+    {
+        "name": "DolphiniOS",
+        "ipaURL": "https://github.com/OatmealDome/dolphin-ios/releases/download/v4.0.0b7/Non-Jailbroken.ipa",
+        "iconURL": "https://raw.githubusercontent.com/OatmealDome/dolphin-ios/5a13030332a897f1093a32c2fdc6a9b216882329/Source/iOS/App/DolphiniOS/Assets.xcassets/AppIcon.appiconset/ios_marketing1024x1024.png"
+    },
+    {
+        "name": "Flappy Bird",
+        "ipaURL": "https://github.com/brandonplank/flappybird/releases/download/4.3/org.brandonplank.flappybird.ipa",
+        "iconURL": "https://raw.githubusercontent.com/brandonplank/flappybird/main/Flappy%20Bird/Assets.xcassets/AppIcon.appiconset/1024.png"
+    },
+    {
+        "name": "UTM",
+        "ipaURL": "https://github.com/utmapp/UTM/releases/download/v4.5.4/UTM.ipa",
+        "iconURL": "https://raw.githubusercontent.com/utmapp/UTM/refs/tags/v4.5.4/Platform/Assets.xcassets/AppIcon.appiconset/Icon.png"
+    },
+    {
+        "name": "Provenance (2.30 XL)",
+        "ipaURL": "https://download2300.mediafire.com/960il8ybretgI94T2N8DEAQENFi_QTirl4sKPXfw3-Oy0TC_QnL4q4q8HdnffPpIPElUNSIEHAF306bCPd55YJ1f-BuJKsXYzbHdUZ_5h0JzfbDJpG_x9VTCjLeu4NT5pzUBSYMGLnN8LqP7t7AcjMVuDParZ8HXU4xni2FWO88/6pwapm4hlbzblem/Provenance-XL.ipa",
+        "iconURL": "https://raw.githubusercontent.com/Provenance-Emu/Provenance/4ae58e005bc60ceb96228026d69526b6ada1514a/Provenance/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon512x512.png"
+    },
+    {
+        "name": "Stossycord",
+        "ipaURL": "https://github.com/Stossycord/Stossycord/releases/download/0.3/Stossycord.ipa",
+        "iconURL": "https://avatars.githubusercontent.com/u/172116843?s=200&v=4"
+    },
+    {
+        "name": "nyCounter",
+        "ipaURL": "https://nythepegas.us/counter/nyCounter.ipa",
+        "iconURL": "https://raw.githubusercontent.com/nythepegasus/nyCounter/d3f4999e4e9956cfd5f9d8f4a4f8447169b8162c/counter/Misc/Assets/Assets.xcassets/AppIcon.appiconset/nyCounter.png"
+    }
+]
