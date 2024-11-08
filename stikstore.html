@@ -159,7 +159,105 @@
                 font-size: 16px;
             }
         }
+        /* Styles for the liability waiver modal */
+        #liabilityModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #liabilityModalContent {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            text-align: left;
+        }
+        #liabilityModalContent p {
+            margin-bottom: 20px;
+        }
+        #liabilityModalContent button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #liabilityModalContent button:first-child {
+            background-color: #007aff;
+            color: #fff;
+            margin-right: 10px;
+        }
+        #liabilityModalContent button:last-child {
+            background-color: #ccc;
+            color: #333;
+        }
     </style>
+
+    <!-- Add this script for the popup functionality -->
+<!-- Modified Liability Waiver Modal with Checkbox -->
+<script>
+    function showLiabilityWaiver() {
+        // Create the modal elements
+        var modal = document.createElement('div');
+        modal.setAttribute('id', 'liabilityModal');
+
+        var modalContent = document.createElement('div');
+        modalContent.setAttribute('id', 'liabilityModalContent');
+
+        // Liability waiver text
+        var waiverText = document.createElement('p');
+        waiverText.innerText = 'By downloading StikStore-Mac, you acknowledge and agree that you are solely responsible for any consequences that may result from its use. The software is provided "as is" without any warranties, express or implied. The developers are not liable for any damages or losses arising from the use or inability to use the software. Use at your own risk.';
+
+        // Checkbox for agreement
+        var checkboxLabel = document.createElement('label');
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'agreeCheckbox';
+        checkboxLabel.appendChild(checkbox);
+        checkboxLabel.appendChild(document.createTextNode(' I have read and agree to the Terms of Service'));
+
+        // Download button (disabled until checkbox is checked)
+        var downloadButton = document.createElement('button');
+        downloadButton.innerText = 'Download';
+        downloadButton.disabled = true;
+        downloadButton.onclick = function() {
+            document.body.removeChild(modal);
+            // Redirect to the download link
+            window.location.href = 'StikStore-Mac.zip';
+        };
+
+        // Enable download button when checkbox is checked
+        checkbox.onchange = function() {
+            downloadButton.disabled = !this.checked;
+        };
+
+        // Cancel button
+        var cancelButton = document.createElement('button');
+        cancelButton.innerText = 'Cancel';
+        cancelButton.onclick = function() {
+            document.body.removeChild(modal);
+        };
+
+        // Append elements
+        modalContent.appendChild(waiverText);
+        modalContent.appendChild(checkboxLabel);
+        modalContent.appendChild(document.createElement('br'));
+        modalContent.appendChild(downloadButton);
+        modalContent.appendChild(cancelButton);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+    }
+</script>
 </head>
 <body>
 
@@ -171,7 +269,8 @@
 <div class="container">
     <img src="StikStore.png" alt="StikStore-Mac Screenshot" class="hero-image">
     <p>Effortlessly download and sideload IPA files with StikStore-Mac.</p>
-    <a href="StikStore-Mac.zip" class="download-button">Download (Coming Very Soon!)</a>
+    <!-- Modify the download button -->
+    <a href="javascript:void(0);" onclick="showLiabilityWaiver()" class="download-button">Download (Coming Very Soon!)</a>
     <br>
     <a href="https://discord.gg/a6qxs97Gun" class="download-button">Discord</a>
 
@@ -199,22 +298,21 @@
             <p><strong>License:</strong> MIT License</p>
             <p><a href="https://github.com/weichsel/ZIPFoundation" target="_blank">View on GitHub</a></p>
             <p><strong>Note:</strong> This project uses the unmodified version of the ZIPFoundation library.</p>
-            
             <div class="license-text">
                 MIT License
 
                 Copyright (c) 2017-2024 Thomas Zoechling (https://www.peakstep.com)
-                
+
                 Permission is hereby granted, free of charge, to any person obtaining a copy
                 of this software and associated documentation files (the "Software"), to deal
                 in the Software without restriction, including without limitation the rights
                 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
                 copies of the Software, and to permit persons to whom the Software is
                 furnished to do so, subject to the following conditions:
-                
+
                 The above copyright notice and this permission notice shall be included in all
                 copies or substantial portions of the Software.
-                
+
                 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
                 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
                 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
