@@ -39,6 +39,25 @@
         header {
             text-align: center;
             padding: 60px 20px;
+            position: relative;
+        }
+        /* Navigation Styles */
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .nav-list {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-list li a {
+            color: #007aff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .nav-list li a:hover {
+            color: #0051a8;
         }
         header h1 {
             font-size: 48px;
@@ -146,6 +165,13 @@
             .screenshot-images img {
                 width: 100%;
             }
+            nav {
+                position: static;
+                margin-bottom: 20px;
+            }
+            .nav-list {
+                justify-content: center;
+            }
         }
         @media (max-width: 600px) {
             header h1 {
@@ -204,64 +230,72 @@
     </style>
 
     <!-- Add this script for the popup functionality -->
-<!-- Modified Liability Waiver Modal with Checkbox -->
-<script>
-    function showLiabilityWaiver() {
-        // Create the modal elements
-        var modal = document.createElement('div');
-        modal.setAttribute('id', 'liabilityModal');
+    <!-- Modified Liability Waiver Modal with Checkbox -->
+    <script>
+        function showLiabilityWaiver() {
+            // Create the modal elements
+            var modal = document.createElement('div');
+            modal.setAttribute('id', 'liabilityModal');
 
-        var modalContent = document.createElement('div');
-        modalContent.setAttribute('id', 'liabilityModalContent');
+            var modalContent = document.createElement('div');
+            modalContent.setAttribute('id', 'liabilityModalContent');
 
-        // Liability waiver text
-        var waiverText = document.createElement('p');
-        waiverText.innerText = 'By downloading and using StikStore-Mac, you acknowledge and agree that you are solely responsible for any consequences that may result from its use. The software is provided "as is" without any warranties, express or implied. The developers are not liable for any damages or losses arising from the use or inability to use the software. Use at your own risk.';
+            // Liability waiver text
+            var waiverText = document.createElement('p');
+            waiverText.innerText = 'By downloading and using StikStore-Mac, you acknowledge and agree that you are solely responsible for any consequences that may result from its use. The software is provided "as is" without any warranties, express or implied. The developers are not liable for any damages or losses arising from the use or inability to use the software. Use at your own risk.';
 
-        // Checkbox for agreement
-        var checkboxLabel = document.createElement('label');
-        var checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = 'agreeCheckbox';
-        checkboxLabel.appendChild(checkbox);
-        checkboxLabel.appendChild(document.createTextNode(' I have read and agree to the Terms of Service'));
+            // Checkbox for agreement
+            var checkboxLabel = document.createElement('label');
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'agreeCheckbox';
+            checkboxLabel.appendChild(checkbox);
+            checkboxLabel.appendChild(document.createTextNode(' I have read and agree to the Terms of Service'));
 
-        // Download button (disabled until checkbox is checked)
-        var downloadButton = document.createElement('button');
-        downloadButton.innerText = 'Download';
-        downloadButton.disabled = true;
-        downloadButton.onclick = function() {
-            document.body.removeChild(modal);
-            // Redirect to the download link
-            window.location.href = 'StikStore-Mac.zip';
-        };
+            // Download button (disabled until checkbox is checked)
+            var downloadButton = document.createElement('button');
+            downloadButton.innerText = 'Download';
+            downloadButton.disabled = true;
+            downloadButton.onclick = function() {
+                document.body.removeChild(modal);
+                // Redirect to the download link
+                window.location.href = 'StikStore-Mac.zip';
+            };
 
-        // Enable download button when checkbox is checked
-        checkbox.onchange = function() {
-            downloadButton.disabled = !this.checked;
-        };
+            // Enable download button when checkbox is checked
+            checkbox.onchange = function() {
+                downloadButton.disabled = !this.checked;
+            };
 
-        // Cancel button
-        var cancelButton = document.createElement('button');
-        cancelButton.innerText = 'Cancel';
-        cancelButton.onclick = function() {
-            document.body.removeChild(modal);
-        };
+            // Cancel button
+            var cancelButton = document.createElement('button');
+            cancelButton.innerText = 'Cancel';
+            cancelButton.onclick = function() {
+                document.body.removeChild(modal);
+            };
 
-        // Append elements
-        modalContent.appendChild(waiverText);
-        modalContent.appendChild(checkboxLabel);
-        modalContent.appendChild(document.createElement('br'));
-        modalContent.appendChild(downloadButton);
-        modalContent.appendChild(cancelButton);
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
-    }
-</script>
+            // Append elements
+            modalContent.appendChild(waiverText);
+            modalContent.appendChild(checkboxLabel);
+            modalContent.appendChild(document.createElement('br'));
+            modalContent.appendChild(downloadButton);
+            modalContent.appendChild(cancelButton);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+    </script>
 </head>
 <body>
 
 <header>
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="nav-list">
+            <li><a href="https://stik.tech/stikstore">Home</a></li>
+            <li><a href="https://stik.tech/stikstore-code" target="_blank">Code</a></li>
+        </ul>
+    </nav>
+
     <h1>StikStore-Mac</h1>
     <p>Let's simplify iOS sideloading</p>
 </header>

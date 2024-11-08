@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StikStore-Mac</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph Meta Tags for Social Media Preview -->
+    <meta property="og:title" content="StikStore-Mac">
+    <meta property="og:description" content="Effortlessly download and sideload IPA files with StikStore-Mac. Let's simplify iOS sideloading.">
+    <meta property="og:image" content="StikStore.png">
+    <meta property="og:url" content="https://stik.tech/stikstore"> <!-- Replace with your actual URL -->
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="StikStore-Mac">
+    <meta name="twitter:description" content="Effortlessly download and sideload IPA files with StikStore-Mac. Let's simplify iOS sideloading.">
+    <meta name="twitter:image" content="StikStore.png">
+
+    <style>
+        /* Reset and base styles */
+        body, h1, h2, h3, p, a, img, div, ul, li, pre {
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            text-decoration: none;
+            list-style: none;
+            color: #000;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+        /* Navigation Styles */
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .nav-list {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-list li a {
+            color: #007aff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .nav-list li a:hover {
+            color: #0051a8;
+        }
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 24px;
+            color: #666;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .hero-image {
+            max-width: 25%;
+            height: auto;
+            display: block;
+            margin: 40px auto;
+        }
+        .download-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #007aff;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 8px;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+        .download-button:hover {
+            background-color: #0051a8;
+        }
+        .screenshots {
+            margin: 60px 0;
+        }
+        .screenshots h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .screenshot-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .screenshot-images img {
+            width: calc(33.33% - 20px);
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .credits {
+            text-align: left;
+            margin: 60px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+        }
+        .credits h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .credits p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .library-credit {
+            margin-bottom: 40px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .library-credit h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .library-credit a {
+            color: #007aff;
+        }
+        .license-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 14px;
+            color: #999;
+        }
+        @media (max-width: 800px) {
+            .screenshot-images img {
+                width: 100%;
+            }
+            nav {
+                position: static;
+                margin-bottom: 20px;
+            }
+            .nav-list {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 36px;
+            }
+            header p {
+                font-size: 18px;
+            }
+            .download-button {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+        /* Styles for the liability waiver modal */
+        #liabilityModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #liabilityModalContent {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            text-align: left;
+        }
+        #liabilityModalContent p {
+            margin-bottom: 20px;
+        }
+        #liabilityModalContent button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #liabilityModalContent button:first-child {
+            background-color: #007aff;
+            color: #fff;
+            margin-right: 10px;
+        }
+        #liabilityModalContent button:last-child {
+            background-color: #ccc;
+            color: #333;
+        }
+    </style>
+
+    <!-- Add this script for the popup functionality -->
+    <!-- Modified Liability Waiver Modal with Checkbox -->
+    <script>
+        function showLiabilityWaiver() {
+            // Create the modal elements
+            var modal = document.createElement('div');
+            modal.setAttribute('id', 'liabilityModal');
+
+            var modalContent = document.createElement('div');
+            modalContent.setAttribute('id', 'liabilityModalContent');
+
+            // Liability waiver text
+            var waiverText = document.createElement('p');
+            waiverText.innerText = 'By downloading and using StikStore-Mac, you acknowledge and agree that you are solely responsible for any consequences that may result from its use. The software is provided "as is" without any warranties, express or implied. The developers are not liable for any damages or losses arising from the use or inability to use the software. Use at your own risk.';
+
+            // Checkbox for agreement
+            var checkboxLabel = document.createElement('label');
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'agreeCheckbox';
+            checkboxLabel.appendChild(checkbox);
+            checkboxLabel.appendChild(document.createTextNode(' I have read and agree to the Terms of Service'));
+
+            // Download button (disabled until checkbox is checked)
+            var downloadButton = document.createElement('button');
+            downloadButton.innerText = 'Download';
+            downloadButton.disabled = true;
+            downloadButton.onclick = function() {
+                document.body.removeChild(modal);
+                // Redirect to the download link
+                window.location.href = 'StikStore-Mac.zip';
+            };
+
+            // Enable download button when checkbox is checked
+            checkbox.onchange = function() {
+                downloadButton.disabled = !this.checked;
+            };
+
+            // Cancel button
+            var cancelButton = document.createElement('button');
+            cancelButton.innerText = 'Cancel';
+            cancelButton.onclick = function() {
+                document.body.removeChild(modal);
+            };
+
+            // Append elements
+            modalContent.appendChild(waiverText);
+            modalContent.appendChild(checkboxLabel);
+            modalContent.appendChild(document.createElement('br'));
+            modalContent.appendChild(downloadButton);
+            modalContent.appendChild(cancelButton);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="nav-list">
+            <li><a href="https://stik.tech/stikstore">Home</a></li>
+            <li><a href="https://stik.tech/stikstore-code" target="_blank">Code</a></li>
+        </ul>
+    </nav>
+
+    <h1>StikStore-Mac Code</h1>
+    <p>Let's simplify iOS sideloading</p>
+</header>
+
+<div class="container">
+    <img src="StikStore.png" alt="StikStore-Mac Screenshot" class="hero-image">
+    <p>Below are open source parts of the code.</p>
+    <br>
+        <div class="library-credit">
+            <h3><strong>Function:</strong> Sign iPA</h3>
+            <p>This function signs the .ipa file.</p>
+            <div class="license-text">
+                private func signIpa(at ipaURL: URL, completion: @escaping (Bool, URL?) -> Void) {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        do {
+                            let uniqueFolderURL = FileManager.default.temporaryDirectory.appendingPathComponent("signed_ipa_\(UUID().uuidString)")
+                            try FileManager.default.createDirectory(at: uniqueFolderURL, withIntermediateDirectories: true, attributes: nil)
+                            try FileManager.default.unzipItem(at: ipaURL, to: uniqueFolderURL)
+                            
+                            let payloadPath = uniqueFolderURL.appendingPathComponent("Payload")
+                            guard FileManager.default.fileExists(atPath: payloadPath.path) else {
+                                throw NSError(domain: "Invalid IPA structure: 'Payload' folder is missing.", code: 1, userInfo: nil)
+                            }
+                            
+                            // Ensure certificate settings are valid
+                            let cert = CertificateSettings.shared
+                            guard let p12FileURL = cert.p12FileURL,
+                                  let mobileProvisionURL = cert.mobileProvisionURL,
+                                  !cert.p12Password.isEmpty else {
+                                print("Certificate settings are incomplete. Cannot sign IPA.")
+                                completion(false, nil)
+                                return
+                            }
+                            
+                            // Sign the IPA
+                            let result = zsign(payloadPath.path, nil, p12FileURL.path, mobileProvisionURL.path, cert.p12Password, nil, nil)
+                            
+                            if result == 0 {
+                                let signedIpaName = "SignedApp_\(UUID().uuidString).ipa"
+                                let signedIpaURL = FileManager.default.temporaryDirectory.appendingPathComponent(signedIpaName)
+                                try FileManager.default.zipItem(at: payloadPath, to: signedIpaURL, shouldKeepParent: true)
+                                
+                                completion(true, signedIpaURL)
+                            } else {
+                                print("Signing failed with result code \(result).")
+                                completion(false, nil)
+                            }
+                            
+                        } catch {
+                            print("An error occurred during signing: \(error.localizedDescription)")
+                            completion(false, nil)
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
