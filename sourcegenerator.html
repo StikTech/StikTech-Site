@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SideStore Source Generator</title>
+  <style>
+    /* General Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px 10px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+}
+
+main {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+input, textarea, button {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus, textarea:focus, button:focus {
+  outline: none;
+  border-color: #007aff;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}
+
+button {
+  background-color: #007aff;
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005ecb;
+}
+
+.secondary-button {
+  background-color: #f9f9f9;
+  color: #007aff;
+  border: 1px solid #007aff;
+}
+
+button.secondary-button:hover {
+  background-color: #e6f0ff;
+}
+
+.app-container {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+}
+
+.remove-button {
+  background-color: #ff3b30;
+  color: white;
+  border: none;
+  font-size: 14px;
+  padding: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.remove-button:hover {
+  background-color: #d32f2f;
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+input[type="text"], input[type="number"], input[type="url"], input[type="date"], textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+button, .remove-button {
+  width: auto;
+  max-width: 100%;
+  padding: 10px;
+}
+
+
+    button:hover {
+      background-color: #005ecb;
+    }
+
+    .secondary-button {
+      background-color: #f9f9f9;
+      color: #007aff;
+      border: 1px solid #007aff;
+    }
+
+    button.secondary-button:hover {
+      background-color: #e6f0ff;
+    }
+
+    .app-container {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fafafa;
+    }
+
+    .remove-button {
+      background-color: #ff3b30;
+      color: white;
+      border: none;
+      font-size: 14px;
+      padding: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .remove-button:hover {
+      background-color: #d32f2f;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SideStore Source Generator</h1>
+  </header>
+
+  <main>
+    <form id="sourceForm">
+      <h2>Source Details</h2>
+      <label for="sourceName">Source Name</label>
+      <input type="text" id="sourceName" placeholder="Enter source name" required>
+
+      <label for="sourceIdentifier">Source Identifier</label>
+      <input type="text" id="sourceIdentifier" placeholder="Enter unique identifier" required>
+
+      <label for="sourceURL">Source URL (optional)</label>
+      <input type="url" id="sourceURL" placeholder="https://example.com">
+
+      <h2>Apps</h2>
+      <div id="appsContainer"></div>
+
+      <button type="button" onclick="addAppForm()">Add App</button>
+      <div class="actions">
+        <button type="button" onclick="generateJSON()">Generate JSON</button>
+        <button type="button" class="secondary-button" onclick="importJSON()">Import JSON</button>
+        <button type="button" class="secondary-button" onclick="downloadJSON()">Download JSON</button>
+      </div>
+      <input type="file" id="jsonFileInput" style="display:none;" accept=".json" onchange="handleJSONFile(event)">
+    </form>
+
+    <h2>Generated JSON</h2>
+    <pre id="output">Your generated JSON will appear here.</pre>
+  </main>
+
+  <script>
+    let appCount = 0;
+
+    function addAppForm(appData = {}) {
+      appCount++;
+      const appsContainer = document.getElementById('appsContainer');
+      const appDiv = document.createElement('div');
+      appDiv.className = 'app-container';
+      appDiv.id = `app-${appCount}`;
+
+      appDiv.innerHTML = `
+        <h3>App ${appCount}</h3>
+        <label for="appName-${appCount}">App Name</label>
+        <input type="text" id="appName-${appCount}" placeholder="App name" value="${appData.name || ''}" required>
+
+        <label for="bundleIdentifier-${appCount}">Bundle Identifier</label>
+        <input type="text" id="bundleIdentifier-${appCount}" placeholder="com.example.app" value="${appData.bundleIdentifier || ''}" required>
+
+        <label for="developerName-${appCount}">Developer Name</label>
+        <input type="text" id="developerName-${appCount}" placeholder="Developer name" value="${appData.developerName || ''}" required>
+
+        <label for="localizedDescription-${appCount}">Description</label>
+        <textarea id="localizedDescription-${appCount}" placeholder="Short app description" rows="4" required>${appData.localizedDescription || ''}</textarea>
+
+        <label for="iconURL-${appCount}">Icon URL</label>
+        <input type="url" id="iconURL-${appCount}" placeholder="https://example.com/icon.png" value="${appData.iconURL || ''}" required>
+
+        <label for="version-${appCount}">Version</label>
+        <input type="text" id="version-${appCount}" placeholder="1.0.0" value="${appData.versions?.[0]?.version || ''}" required>
+
+        <label for="versionDate-${appCount}">Version Date (YYYY-MM-DD)</label>
+        <input type="date" id="versionDate-${appCount}" value="${appData.versions?.[0]?.date || ''}" required>
+
+        <label for="downloadURL-${appCount}">Download URL</label>
+        <input type="url" id="downloadURL-${appCount}" placeholder="https://example.com/download" value="${appData.versions?.[0]?.downloadURL || ''}" required>
+
+        <label for="size-${appCount}">Size (in bytes)</label>
+        <input type="number" id="size-${appCount}" placeholder="Size in bytes" value="${appData.versions?.[0]?.size || ''}" required>
+
+        <button type="button" class="remove-button" onclick="removeAppForm(${appCount})">Remove App</button>
+      `;
+
+      appsContainer.appendChild(appDiv);
+    }
+
+    function removeAppForm(appId) {
+      const appDiv = document.getElementById(`app-${appId}`);
+      appDiv.remove();
+    }
+
+    function generateJSON() {
+      const sourceName = document.getElementById('sourceName').value;
+      const sourceIdentifier = document.getElementById('sourceIdentifier').value;
+      const sourceURL = document.getElementById('sourceURL').value;
+
+      const apps = [];
+      for (let i = 1; i <= appCount; i++) {
+        const appDiv = document.getElementById(`app-${i}`);
+        if (appDiv) {
+          const appName = document.getElementById(`appName-${i}`).value;
+          const bundleIdentifier = document.getElementById(`bundleIdentifier-${i}`).value;
+          const developerName = document.getElementById(`developerName-${i}`).value;
+          const localizedDescription = document.getElementById(`localizedDescription-${i}`).value;
+          const iconURL = document.getElementById(`iconURL-${i}`).value;
+          const version = document.getElementById(`version-${i}`).value;
+          const versionDate = document.getElementById(`versionDate-${i}`).value;
+          const downloadURL = document.getElementById(`downloadURL-${i}`).value;
+          const size = parseInt(document.getElementById(`size-${i}`).value, 10);
+
+          apps.push({
+            name: appName,
+            bundleIdentifier: bundleIdentifier,
+            developerName: developerName,
+            localizedDescription: localizedDescription,
+            iconURL: iconURL,
+            versions: [
+              {
+                version: version,
+                date: versionDate,
+                downloadURL: downloadURL,
+                size: size
+              }
+            ]
+          });
+        }
+      }
+
+      const sourceJSON = {
+        name: sourceName,
+        identifier: sourceIdentifier,
+        sourceURL: sourceURL || undefined,
+        apps: apps
+      };
+
+      const outputElement = document.getElementById('output');
+      outputElement.textContent = JSON.stringify(sourceJSON, null, 2);
+
+      return sourceJSON;
+    }
+
+    function importJSON() {
+      document.getElementById('jsonFileInput').click();
+    }
+
+    function handleJSONFile(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const data = JSON.parse(e.target.result);
+
+            // Populate source data
+            document.getElementById('sourceName').value = data.name || '';
+            document.getElementById('sourceIdentifier').value = data.identifier || '';
+            document.getElementById('sourceURL').value = data.sourceURL || '';
+
+            // Populate apps
+            document.getElementById('appsContainer').innerHTML = '';
+            appCount = 0; // Reset app count
+            if (Array.isArray(data.apps)) {
+              data.apps.forEach((app) => addAppForm(app));
+            }
+          } catch (error) {
+            alert('Invalid JSON file.');
+          }
+        };
+        reader.readAsText(file);
+      }
+    }
+
+    function downloadJSON() {
+      const sourceJSON = generateJSON();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(sourceJSON, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute('href', dataStr);
+      downloadAnchor.setAttribute('download', 'sidestore_source.json');
+      downloadAnchor.click();
+    }
+  </script>
+</body>
+</html>
