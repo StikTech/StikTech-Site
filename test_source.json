@@ -1,0 +1,21 @@
+{
+  "name": "StikTech Source",
+  "identifier": "stiktech.source",
+  "apps": [
+    {
+      "name": "Pomelo",
+      "bundleIdentifier": "com.stossy11.Pomelo",
+      "developerName": "Stossy11 and Tech Guy",
+      "localizedDescription": "A Nintendo Switch Emulator for iOS and iPadOS",
+      "iconURL": "https://pomelo-emu.github.io/pomelo-icon.png",
+      "versions": [
+        {
+          "version": "2.6",
+          "date": "2024-11-17",
+          "downloadURL": "https://github.com/Pomelo-Emu/pomelo-emu.github.io/releases/download/2.6/Pomelo.ipa",
+          "size": 28906712
+        }
+      ]
+    }
+  ]
+}
