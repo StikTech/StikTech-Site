@@ -1,44 +1,55 @@
-[
+{
+  "name": "StikTech's Cool App Repo",
+  "identifier": "com.stik.coolapps",
+  "sourceURL": "https://stik.tech/repo.json",
+  "sourceIconURL": "https://stik.tech/StikTech.png",
+  "userinfo": {},
+  "apps": [
     {
-        "name": "DolphiniOS",
-        "description": "A GameCube and Wii emulator for iOS.",
-        "version": "4.0.0b7",
-        "ipaURL": "https://github.com/OatmealDome/dolphin-ios/releases/download/v4.0.0b7/Non-Jailbroken.ipa",
-        "iconURL": "https://raw.githubusercontent.com/OatmealDome/dolphin-ios/5a13030332a897f1093a32c2fdc6a9b216882329/Source/iOS/App/DolphiniOS/Assets.xcassets/AppIcon.appiconset/ios_marketing1024x1024.png"
-    },
-    {
-        "name": "Flappy Bird",
-        "description": "An iOS port of the classic Flappy Bird game.",
-        "version": "4.3",
-        "ipaURL": "https://github.com/brandonplank/flappybird/releases/download/4.3/org.brandonplank.flappybird.ipa",
-        "iconURL": "https://raw.githubusercontent.com/brandonplank/flappybird/main/Flappy%20Bird/Assets.xcassets/AppIcon.appiconset/1024.png"
-    },
-    {
-        "name": "UTM",
-        "description": "Run virtual machines on iOS devices.",
-        "version": "4.5.4",
-        "ipaURL": "https://github.com/utmapp/UTM/releases/download/v4.5.4/UTM.ipa",
-        "iconURL": "https://raw.githubusercontent.com/utmapp/UTM/refs/tags/v4.5.4/Platform/Assets.xcassets/AppIcon.appiconset/Icon.png"
-    },
-    {
-        "name": "Provenance",
-        "description": "An iOS emulator for classic video games.",
-        "version": "2.30 XL",
-        "ipaURL": "https://download2300.mediafire.com/960il8ybretgI94T2N8DEAQENFi_QTirl4sKPXfw3-Oy0TC_QnL4q4q8HdnffPpIPElUNSIEHAF306bCPd55YJ1f-BuJKsXYzbHdUZ_5h0JzfbDJpG_x9VTCjLeu4NT5pzUBSYMGLnN8LqP7t7AcjMVuDParZ8HXU4xni2FWO88/6pwapm4hlbzblem/Provenance-XL.ipa",
-        "iconURL": "https://raw.githubusercontent.com/Provenance-Emu/Provenance/4ae58e005bc60ceb96228026d69526b6ada1514a/Provenance/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon512x512.png"
-    },
-    {
-        "name": "Stossycord",
-        "description": "A modified Discord client for iOS.",
-        "version": "0.3",
-        "ipaURL": "https://github.com/Stossycord/Stossycord/releases/download/0.3/Stossycord.ipa",
-        "iconURL": "https://avatars.githubusercontent.com/u/172116843?s=200&v=4"
-    },
-    {
-        "name": "nyCounter",
-        "description": "A simple counter app for iOS.",
-        "version": "1.0",
-        "ipaURL": "https://nythepegas.us/counter/nyCounter.ipa",
-        "iconURL": "https://raw.githubusercontent.com/nythepegasus/nyCounter/d3f4999e4e9956cfd5f9d8f4a4f8447169b8162c/counter/Misc/Assets/Assets.xcassets/AppIcon.appiconset/nyCounter.png"
+      "name": "Xash3D FWGS",
+      "bundleIdentifier": "su.FWGS.xash3d-ios",
+      "developerName": "FWGS",
+      "version": "0.19.2",
+      "versionDate": "2018-07-14T23:59:49Z",
+      "versionDescription": "# v0.19.2\n\n",
+      "downloadURL": "https://github.com/FWGS/xash3d/releases/download/v0.19.2/xash3d_fwgs_ios_arm64_0.19.2.ipa",
+      "localizedDescription": "Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch. The multiplayer part is not yet completed, multiplayer mods should work just fine, but bear in mind that some features may not work at all or work not exactly the way they do in Gold Source Engine.",
+      "iconURL": "https://img.utdstc.com/icon/578/48b/57848b101da4c0db23183f11d7f715919eef5252e4526d8cf15d0e450178d161:200",
+      "tintColor": "#F74510",
+      "size": 16266695,
+      "screenshotURLs": [
+        "https://i.imgur.com/CWl6GgH.png",
+        "https://i.imgur.com/SxmN1M0.png",
+        "https://i.imgur.com/sGWgR6z.png",
+        "https://i.imgur.com/AFKTdmZ.png"
+      ],
+      "subtitle": "Xash3D games on iOS.",
+      "absoluteVersion": "0.19.2",
+      "appID": "su.FWGS.xash3d-ios",
+      "versions": [
+        {
+          "version": "1.13.2",
+          "date": "2018-07-14T23:59:49Z",
+          "downloadURL": "https://github.com/FWGS/xash3d/releases/download/v0.19.2/xash3d_fwgs_ios_arm64_0.19.2.ipa",
+          "localizedDescription": "# v0.19.2\n\n",
+          "size": 16266695,
+          "absoluteVersion": "0.19.2"
+        }
+      ]
     }
-]
+  ],
+  "news": [
+    {
+      "title": "Xash3D FWGS has now been added!",
+      "identifier": "xash-release",
+      "caption": "You can now play Xash3D games on iOS!",
+      "tintColor": "#F74510",
+      "imageURL": "https://img.utdstc.com/icon/578/48b/57848b101da4c0db23183f11d7f715919eef5252e4526d8cf15d0e450178d161:200",
+      "appID": "su.FWGS.xash3d-ios",
+      "date": "2024-11-22",
+      "notify": false
+    }
+  ],
+  "version": 2,
+  "apiVersion": "v2"
+}
