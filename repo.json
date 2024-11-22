@@ -1,0 +1,55 @@
+{
+  "name": "StikTech's Cool App Repo",
+  "identifier": "com.stik.coolapps",
+  "sourceURL": "https://stik.tech/repo.json",
+  "sourceIconURL": "https://stik.tech/StikTech.png",
+  "userinfo": {},
+  "apps": [
+    {
+      "name": "Xash3D FWGS",
+      "bundleIdentifier": "su.FWGS.xash3d-ios",
+      "developerName": "FWGS",
+      "version": "0.19.2",
+      "versionDate": "2022-09-18T23:59:49Z",
+      "versionDescription": "# v0.19.2\n\n",
+      "downloadURL": "https://github.com/FWGS/xash3d/releases/download/v0.19.2/xash3d_fwgs_ios_arm64_0.19.2.ipa",
+      "localizedDescription": "Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch. The multiplayer part is not yet completed, multiplayer mods should work just fine, but bear in mind that some features may not work at all or work not exactly the way they do in Gold Source Engine.",
+      "iconURL": "https://img.utdstc.com/icon/578/48b/57848b101da4c0db23183f11d7f715919eef5252e4526d8cf15d0e450178d161:200",
+      "tintColor": "#F74510",
+      "size": 16266695,
+      "screenshotURLs": [
+        "https://i.imgur.com/CWl6GgH.png",
+        "https://i.imgur.com/SxmN1M0.png",
+        "https://i.imgur.com/sGWgR6z.png",
+        "https://i.imgur.com/AFKTdmZ.png"
+      ],
+      "subtitle": "Xash3D games on iOS.",
+      "absoluteVersion": "0.19.2",
+      "appID": "su.FWGS.xash3d-ios",
+      "versions": [
+        {
+          "version": "1.13.2",
+          "date": "2022-09-18T23:59:49Z",
+          "downloadURL": "https://github.com/FWGS/xash3d/releases/download/v0.19.2/xash3d_fwgs_ios_arm64_0.19.2.ipa",
+          "localizedDescription": "# v0.19.2\n\n",
+          "size": 16266695,
+          "absoluteVersion": "0.19.2"
+        }
+      ]
+    }
+  ],
+  "news": [
+    {
+      "title": "Xash3D FWGS has now been added!",
+      "identifier": "xash-release",
+      "caption": "You can now play Xash3D games on iOS!",
+      "tintColor": "#F74510",
+      "imageURL": "https://img.utdstc.com/icon/578/48b/57848b101da4c0db23183f11d7f715919eef5252e4526d8cf15d0e450178d161:200",
+      "appID": "su.FWGS.xash3d-ios",
+      "date": "2024-11-22",
+      "notify": false
+    }
+  ],
+  "version": 2,
+  "apiVersion": "v2"
+}
