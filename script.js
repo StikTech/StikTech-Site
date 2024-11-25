@@ -30,6 +30,8 @@ async function fetchSigningData() {
             iosVersion: firmware.version,
             status: firmware.signed ? "Signed" : "Not Signed",
             downloadUrl: firmware.url,
+            isBeta: firmware.beta ? "Beta" : "Stable", // Check for beta firmware
+            delayOTA: firmware.delay_ota ? "Delayed" : "Not Delayed", // Check if OTA profile is delayed
           });
         });
       } catch (firmwareError) {
@@ -55,14 +57,17 @@ function populateFilters(data) {
   const deviceTypeSelect = document.getElementById("device-type");
   const deviceSelect = document.getElementById("device");
   const versionSelect = document.getElementById("ios-version");
+  const betaSelect = document.getElementById("beta-status");
 
   const deviceTypeSet = new Set(data.map(item => item.deviceType));
   const versionSet = new Set(data.map(item => item.iosVersion));
+  const betaSet = new Set(data.map(item => item.isBeta));
 
   // Clear and populate dropdowns
   deviceTypeSelect.innerHTML = `<option value="All">All Device Types</option>`;
   deviceSelect.innerHTML = `<option value="All">All Devices</option>`;
   versionSelect.innerHTML = `<option value="All">All Versions</option>`;
+  betaSelect.innerHTML = `<option value="All">All Status</option>`;
 
   deviceTypeSet.forEach(type => {
     const option = document.createElement("option");
@@ -76,6 +81,13 @@ function populateFilters(data) {
     option.value = version;
     option.textContent = version;
     versionSelect.appendChild(option);
+  });
+
+  betaSet.forEach(beta => {
+    const option = document.createElement("option");
+    option.value = beta;
+    option.textContent = beta;
+    betaSelect.appendChild(option);
   });
 }
 
@@ -99,7 +111,7 @@ function updateDeviceDropdown(data, selectedType) {
 }
 
 // Render the table based on data and filters
-function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFilter = "All", versionFilter = "All") {
+function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFilter = "All", versionFilter = "All", betaFilter = "All") {
   const tableBody = document.getElementById("status-table");
   const noDataMessage = document.getElementById("no-data-message");
 
@@ -111,11 +123,12 @@ function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFil
       deviceTypeFilter === "All" || item.deviceType === deviceTypeFilter;
     const matchesDevice = deviceFilter === "All" || item.device === deviceFilter;
     const matchesVersion = versionFilter === "All" || item.iosVersion === versionFilter;
+    const matchesBeta = betaFilter === "All" || item.isBeta === betaFilter;
     const matchesSearch =
       !searchQuery ||
       item.device.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.iosVersion.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesDeviceType && matchesDevice && matchesVersion && matchesSearch;
+    return matchesDeviceType && matchesDevice && matchesVersion && matchesBeta && matchesSearch;
   });
 
   if (filteredData.length === 0) {
@@ -130,6 +143,8 @@ function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFil
       <td>${item.device}</td>
       <td>${item.iosVersion}</td>
       <td>${item.status}</td>
+      <td>${item.isBeta}</td>
+      <td>${item.delayOTA}</td>
       <td>${item.downloadUrl ? `<a href="${item.downloadUrl}" target="_blank">Download</a>` : "N/A"}</td>
     `;
     tableBody.appendChild(row);
@@ -154,6 +169,7 @@ async function init() {
   const deviceTypeSelect = document.getElementById("device-type");
   const deviceSelect = document.getElementById("device");
   const versionSelect = document.getElementById("ios-version");
+  const betaSelect = document.getElementById("beta-status");
 
   searchBar.addEventListener("input", () =>
     renderTable(
@@ -161,7 +177,8 @@ async function init() {
       searchBar.value,
       deviceTypeSelect.value,
       deviceSelect.value,
-      versionSelect.value
+      versionSelect.value,
+      betaSelect.value
     )
   );
 
@@ -172,7 +189,8 @@ async function init() {
       searchBar.value,
       deviceTypeSelect.value,
       deviceSelect.value,
-      versionSelect.value
+      versionSelect.value,
+      betaSelect.value
     );
   });
 
@@ -182,7 +200,8 @@ async function init() {
       searchBar.value,
       deviceTypeSelect.value,
       deviceSelect.value,
-      versionSelect.value
+      versionSelect.value,
+      betaSelect.value
     )
   );
 
@@ -192,7 +211,19 @@ async function init() {
       searchBar.value,
       deviceTypeSelect.value,
       deviceSelect.value,
-      versionSelect.value
+      versionSelect.value,
+      betaSelect.value
+    )
+  );
+
+  betaSelect.addEventListener("change", () =>
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value,
+      betaSelect.value
     )
   );
 
