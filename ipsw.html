@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iOS Signing Status</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>iOS Signing Status</h1>
+  </header>
+  <main>
+    <div id="filter">
+      <select id="device">
+        <option value="All">All Devices</option>
+      </select>
+      <select id="ios-version">
+        <option value="All">All Versions</option>
+      </select>
+    </div>
+    <div id="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>iOS Version</th>
+            <th>Signing Status</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody id="status-table">
+          <!-- Data will be dynamically injected here -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer>
+    <p>Data powered by <a href="https://ipsw.me" target="_blank">IPSW.me</a></p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
