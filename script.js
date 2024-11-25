@@ -1,8 +1,3 @@
-// Global variables for pagination
-let currentPage = 1;
-const rowsPerPage = 10;
-let currentTab = 'stable'; // Default tab is stable
-
 // Fetch signing data from the IPSW API
 async function fetchSigningData() {
   const spinner = document.getElementById("loading-spinner");
@@ -35,8 +30,6 @@ async function fetchSigningData() {
             iosVersion: firmware.version,
             status: firmware.signed ? "Signed" : "Not Signed",
             downloadUrl: firmware.url,
-            isBeta: firmware.beta ? "Beta" : "Stable", // Check for beta firmware
-            delayOTA: firmware.delay_ota ? "Delayed" : "Not Delayed", // Check if OTA profile is delayed
           });
         });
       } catch (firmwareError) {
@@ -62,7 +55,6 @@ function populateFilters(data) {
   const deviceTypeSelect = document.getElementById("device-type");
   const deviceSelect = document.getElementById("device");
   const versionSelect = document.getElementById("ios-version");
-  const betaSelect = document.getElementById("beta-status");
 
   const deviceTypeSet = new Set(data.map(item => item.deviceType));
   const versionSet = new Set(data.map(item => item.iosVersion));
@@ -71,46 +63,66 @@ function populateFilters(data) {
   deviceTypeSelect.innerHTML = `<option value="All">All Device Types</option>`;
   deviceSelect.innerHTML = `<option value="All">All Devices</option>`;
   versionSelect.innerHTML = `<option value="All">All Versions</option>`;
-  betaSelect.innerHTML = `<option value="All">All Status</option>`;
 
   deviceTypeSet.forEach(type => {
-    deviceTypeSelect.innerHTML += `<option value="${type}">${type}</option>`;
+    const option = document.createElement("option");
+    option.value = type;
+    option.textContent = type;
+    deviceTypeSelect.appendChild(option);
   });
 
   versionSet.forEach(version => {
-    versionSelect.innerHTML += `<option value="${version}">${version}</option>`;
-  });
-
-  betaSelect.innerHTML += `<option value="Beta">Beta</option>`;
-  betaSelect.innerHTML += `<option value="Stable">Stable</option>`;
-}
-
-// Filter data based on selected tab and filters
-function filterData(data) {
-  return data.filter(item => {
-    if (currentTab === 'beta' && item.isBeta === "Stable") return false;
-    if (currentTab === 'stable' && item.isBeta === "Beta") return false;
-    if (currentTab === 'ota' && item.delayOTA === "Not Delayed") return false;
-
-    return true;
+    const option = document.createElement("option");
+    option.value = version;
+    option.textContent = version;
+    versionSelect.appendChild(option);
   });
 }
 
-// Render the table with filtered data
-function renderTable(data, searchQuery, deviceTypeFilter, deviceFilter, versionFilter, betaFilter) {
-  const filteredData = filterData(data).filter(item => {
-    const matchesSearch = item.device.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          item.iosVersion.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDeviceType = deviceTypeFilter === "All" || item.deviceType === deviceTypeFilter;
+// Update devices dropdown based on the selected device type
+function updateDeviceDropdown(data, selectedType) {
+  const deviceSelect = document.getElementById("device");
+  deviceSelect.innerHTML = `<option value="All">All Devices</option>`;
+
+  const filteredDevices = new Set(
+    data
+      .filter(item => selectedType === "All" || item.deviceType === selectedType)
+      .map(item => item.device)
+  );
+
+  filteredDevices.forEach(device => {
+    const option = document.createElement("option");
+    option.value = device;
+    option.textContent = device;
+    deviceSelect.appendChild(option);
+  });
+}
+
+// Render the table based on data and filters
+function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFilter = "All", versionFilter = "All") {
+  const tableBody = document.getElementById("status-table");
+  const noDataMessage = document.getElementById("no-data-message");
+
+  tableBody.innerHTML = ""; // Clear table
+  noDataMessage.classList.add("hidden");
+
+  const filteredData = data.filter(item => {
+    const matchesDeviceType =
+      deviceTypeFilter === "All" || item.deviceType === deviceTypeFilter;
     const matchesDevice = deviceFilter === "All" || item.device === deviceFilter;
     const matchesVersion = versionFilter === "All" || item.iosVersion === versionFilter;
-    const matchesBeta = betaFilter === "All" || item.isBeta === betaFilter;
-
-    return matchesDeviceType && matchesDevice && matchesVersion && matchesBeta && matchesSearch;
+    const matchesSearch =
+      !searchQuery ||
+      item.device.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.iosVersion.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesDeviceType && matchesDevice && matchesVersion && matchesSearch;
   });
 
-  const tableBody = document.getElementById("status-table");
-  tableBody.innerHTML = "";
+  if (filteredData.length === 0) {
+    noDataMessage.textContent = "No results found. Try a different filter or search.";
+    noDataMessage.classList.remove("hidden");
+    return;
+  }
 
   filteredData.forEach(item => {
     const row = document.createElement("tr");
@@ -118,54 +130,73 @@ function renderTable(data, searchQuery, deviceTypeFilter, deviceFilter, versionF
       <td>${item.device}</td>
       <td>${item.iosVersion}</td>
       <td>${item.status}</td>
-      <td>${item.isBeta}</td>
-      <td>${item.delayOTA}</td>
       <td>${item.downloadUrl ? `<a href="${item.downloadUrl}" target="_blank">Download</a>` : "N/A"}</td>
     `;
     tableBody.appendChild(row);
   });
-
-  updatePagination(filteredData.length);
-}
-
-// Update pagination controls
-function updatePagination(totalRecords) {
-  const totalPages = Math.ceil(totalRecords / rowsPerPage);
-  const pagination = document.getElementById("pagination");
-  pagination.innerHTML = "";
-
-  for (let i = 1; i <= totalPages; i++) {
-    const button = document.createElement("button");
-    button.textContent = i;
-    button.classList.add("pagination-btn");
-    button.addEventListener("click", () => {
-      currentPage = i;
-      renderTable(filteredData);
-    });
-    pagination.appendChild(button);
-  }
-}
-
-// Tab click event to filter data
-function handleTabClick(event) {
-  const tabButtons = document.querySelectorAll(".tab-button");
-  tabButtons.forEach(button => button.classList.remove("active"));
-  event.target.classList.add("active");
-
-  currentTab = event.target.getAttribute("data-tab");
-  renderTable(filteredData);
 }
 
 // Initialize the application
 async function init() {
+  console.log("Initializing application...");
   const data = await fetchSigningData();
+
+  if (data.length === 0) {
+    console.error("No data fetched. Check API connection or response structure.");
+    return;
+  }
+
   populateFilters(data);
-
-  // Set up tab click event listeners
-  const tabButtons = document.querySelectorAll(".tab-button");
-  tabButtons.forEach(button => button.addEventListener("click", handleTabClick));
-
   renderTable(data);
+
+  // Event listeners for filtering
+  const searchBar = document.getElementById("search-bar");
+  const deviceTypeSelect = document.getElementById("device-type");
+  const deviceSelect = document.getElementById("device");
+  const versionSelect = document.getElementById("ios-version");
+
+  searchBar.addEventListener("input", () =>
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
+  );
+
+  deviceTypeSelect.addEventListener("change", () => {
+    updateDeviceDropdown(data, deviceTypeSelect.value);
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    );
+  });
+
+  deviceSelect.addEventListener("change", () =>
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
+  );
+
+  versionSelect.addEventListener("change", () =>
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
+  );
+
+  console.log("Application initialized successfully.");
 }
 
 // Start the app
