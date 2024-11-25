@@ -98,66 +98,102 @@ function updateDeviceDropdown(data, selectedType) {
   });
 }
 
-// Render the data table
-function renderTable(data, searchTerm, selectedDeviceType, selectedDevice, selectedVersion) {
+// Render the table based on data and filters
+function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFilter = "All", versionFilter = "All") {
   const tableBody = document.getElementById("status-table");
-  tableBody.innerHTML = "";
+  const noDataMessage = document.getElementById("no-data-message");
+
+  tableBody.innerHTML = ""; // Clear table
+  noDataMessage.classList.add("hidden");
 
   const filteredData = data.filter(item => {
-    return (
-      (selectedDeviceType === "All" || item.deviceType === selectedDeviceType) &&
-      (selectedDevice === "All" || item.device === selectedDevice) &&
-      (selectedVersion === "All" || item.iosVersion === selectedVersion) &&
-      (item.device.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.iosVersion.includes(searchTerm))
-    );
+    const matchesDeviceType =
+      deviceTypeFilter === "All" || item.deviceType === deviceTypeFilter;
+    const matchesDevice = deviceFilter === "All" || item.device === deviceFilter;
+    const matchesVersion = versionFilter === "All" || item.iosVersion === versionFilter;
+    const matchesSearch =
+      !searchQuery ||
+      item.device.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.iosVersion.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesDeviceType && matchesDevice && matchesVersion && matchesSearch;
   });
 
   if (filteredData.length === 0) {
-    document.getElementById("no-data-message").classList.remove("hidden");
+    noDataMessage.textContent = "No results found. Try a different filter or search.";
+    noDataMessage.classList.remove("hidden");
     return;
   }
 
   filteredData.forEach(item => {
     const row = document.createElement("tr");
-
     row.innerHTML = `
       <td>${item.device}</td>
       <td>${item.iosVersion}</td>
       <td>${item.status}</td>
-      <td><a href="${item.downloadUrl}" target="_blank">Download</a></td>
+      <td>${item.downloadUrl ? `<a href="${item.downloadUrl}" target="_blank">Download</a>` : "N/A"}</td>
     `;
-
     tableBody.appendChild(row);
   });
 }
 
-// Initialize the app
+// Initialize the application
 async function init() {
+  console.log("Initializing application...");
   const data = await fetchSigningData();
-  populateFilters(data);
-  updateDeviceDropdown(data, "All");
 
+  if (data.length === 0) {
+    console.error("No data fetched. Check API connection or response structure.");
+    return;
+  }
+
+  populateFilters(data);
+  renderTable(data);
+
+  // Event listeners for filtering
   const searchBar = document.getElementById("search-bar");
   const deviceTypeSelect = document.getElementById("device-type");
   const deviceSelect = document.getElementById("device");
   const versionSelect = document.getElementById("ios-version");
 
   searchBar.addEventListener("input", () =>
-    renderTable(data, searchBar.value, deviceTypeSelect.value, deviceSelect.value, versionSelect.value)
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
   );
 
   deviceTypeSelect.addEventListener("change", () => {
     updateDeviceDropdown(data, deviceTypeSelect.value);
-    renderTable(data, searchBar.value, deviceTypeSelect.value, deviceSelect.value, versionSelect.value);
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    );
   });
 
   deviceSelect.addEventListener("change", () =>
-    renderTable(data, searchBar.value, deviceTypeSelect.value, deviceSelect.value, versionSelect.value)
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
   );
 
   versionSelect.addEventListener("change", () =>
-    renderTable(data, searchBar.value, deviceTypeSelect.value, deviceSelect.value, versionSelect.value)
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
   );
 
   console.log("Application initialized successfully.");
