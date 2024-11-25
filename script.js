@@ -1,31 +1,52 @@
 // Fetch real-time signing data from Apple's IPSW API
 async function fetchSigningData() {
-  const response = await fetch('https://api.ipsw.me/v4/devices');
-  const devices = await response.json();
-  const signingData = [];
+  console.log("Fetching device list from IPSW API...");
 
-  // Process each device to gather signing status for all versions
-  for (const device of devices) {
-    const deviceName = device.identifier;
+  try {
+    const response = await fetch('https://api.ipsw.me/v4/devices');
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-    // Fetch firmware info for the device
-    const firmwareResponse = await fetch(`https://api.ipsw.me/v4/device/${deviceName}?type=ipsw`);
-    const firmwareData = await firmwareResponse.json();
+    const devices = await response.json();
+    console.log(`Fetched ${devices.length} devices from API.`);
+    const signingData = [];
 
-    firmwareData.firmwares.forEach(firmware => {
-      signingData.push({
-        device: firmwareData.name,
-        iosVersion: firmware.version,
-        status: firmware.signed ? 'Signed' : 'Not Signed',
-        downloadUrl: firmware.url
-      });
-    });
+    // Process each device to gather signing status for all versions
+    for (const device of devices) {
+      const deviceName = device.identifier;
+      console.log(`Fetching firmware data for device: ${deviceName}`);
+
+      try {
+        const firmwareResponse = await fetch(`https://api.ipsw.me/v4/device/${deviceName}?type=ipsw`);
+        if (!firmwareResponse.ok) throw new Error(`HTTP error! Status: ${firmwareResponse.status}`);
+
+        const firmwareData = await firmwareResponse.json();
+
+        console.log(`Device: ${firmwareData.name}, Firmwares found: ${firmwareData.firmwares.length}`);
+        firmwareData.firmwares.forEach(firmware => {
+          signingData.push({
+            device: firmwareData.name,
+            iosVersion: firmware.version,
+            status: firmware.signed ? 'Signed' : 'Not Signed',
+            downloadUrl: firmware.url
+          });
+        });
+      } catch (firmwareError) {
+        console.error(`Error fetching firmware data for device ${deviceName}: ${firmwareError.message}`);
+      }
+    }
+
+    console.log(`Total firmware records processed: ${signingData.length}`);
+    return signingData;
+  } catch (error) {
+    console.error(`Error fetching device list: ${error.message}`);
+    return [];
   }
-  return signingData;
 }
 
 // Populate dropdown filters
 function populateFilters(data) {
+  console.log("Populating dropdown filters...");
+
   const deviceSet = new Set(data.map(item => item.device));
   const versionSet = new Set(data.map(item => item.iosVersion));
 
@@ -45,10 +66,14 @@ function populateFilters(data) {
     option.textContent = version;
     versionSelect.appendChild(option);
   });
+
+  console.log("Filters populated successfully.");
 }
 
 // Render table dynamically
 function renderTable(data, deviceFilter, versionFilter) {
+  console.log("Rendering table...");
+
   const tableBody = document.getElementById('status-table');
   tableBody.innerHTML = '';
 
@@ -56,6 +81,14 @@ function renderTable(data, deviceFilter, versionFilter) {
     (deviceFilter === 'All' || item.device === deviceFilter) &&
     (versionFilter === 'All' || item.iosVersion === versionFilter)
   );
+
+  if (filteredData.length === 0) {
+    console.warn("No data available for the selected filters.");
+    const row = document.createElement('tr');
+    row.innerHTML = `<td colspan="4" style="text-align: center;">No data available</td>`;
+    tableBody.appendChild(row);
+    return;
+  }
 
   filteredData.forEach(item => {
     const row = document.createElement('tr');
@@ -67,11 +100,20 @@ function renderTable(data, deviceFilter, versionFilter) {
     `;
     tableBody.appendChild(row);
   });
+
+  console.log("Table rendered successfully.");
 }
 
 // Initialize the app
 async function init() {
+  console.log("Initializing app...");
+
   const data = await fetchSigningData();
+  if (data.length === 0) {
+    console.error("No data fetched. Check API connection or response structure.");
+    return;
+  }
+
   populateFilters(data);
 
   const deviceSelect = document.getElementById('device');
@@ -86,6 +128,8 @@ async function init() {
   versionSelect.addEventListener('change', () =>
     renderTable(data, deviceSelect.value, versionSelect.value)
   );
+
+  console.log("App initialized successfully.");
 }
 
 init();
