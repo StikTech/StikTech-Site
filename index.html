@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StikTech - IPSW</title>
+  <title>iOS Signing Status</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>StikTech - IPSW</h1>
+    <h1>iOS Signing Status</h1>
   </header>
   <main>
     <div id="controls">
       <input type="text" id="search-bar" placeholder="Search devices or iOS versions..." />
+      <select id="device-type">
+        <option value="" disabled selected>Select a Device Type</option>
+        <option value="All">All Device Types</option>
+      </select>
       <select id="device">
         <option value="" disabled selected>Select a Device</option>
         <option value="All">All Devices</option>
@@ -22,6 +26,10 @@
         <option value="All">All Versions</option>
       </select>
     </div>
+
+    <!-- Privacy Policy Button -->
+    <button id="privacy-policy-btn">Privacy Policy</button>
+
     <div id="table-container">
       <div id="loading-spinner" class="hidden">Loading...</div>
       <table>
@@ -40,9 +48,25 @@
       <div id="no-data-message" class="hidden">No results found. Try a different filter or search.</div>
     </div>
   </main>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacy-policy-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-btn" class="close">&times;</span>
+      <h2>Privacy Policy</h2>
+      <p>
+        We value your privacy. This website does not collect personal data.
+        However, data regarding device and firmware signing is retrieved 
+        from a third-party APIs for display purposes only. Please review
+        the terms of use of the external APIs <a href="https://ipsw.me/privacypolicy" target="_blank">(IPSW.me)</a> for further details.
+      </p>
+    </div>
+  </div>
+
   <footer>
     <p>Data powered by <a href="https://ipsw.me" target="_blank">IPSW.me</a></p>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
