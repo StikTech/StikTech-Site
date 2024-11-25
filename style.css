@@ -1,4 +1,4 @@
-/* General styles */
+/* General styles inspired by Apple's design language */
 :root {
   --background-light: #f5f5f7;
   --background-dark: #1d1d1f;
@@ -8,6 +8,7 @@
   --border-light: #d2d2d7;
   --border-dark: #3a3a3c;
 
+  /* Default theme (light) */
   --background: var(--background-light);
   --text: var(--text-light);
   --border: var(--border-light);
@@ -35,18 +36,16 @@ main {
   padding: 1rem;
 }
 
-#controls {
+#filter {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-#controls input,
-#controls select {
+#filter select {
   font-size: 1rem;
   padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
   border: 1px solid var(--border);
   border-radius: 8px;
   background-color: var(--background);
@@ -54,32 +53,13 @@ main {
   transition: border-color 0.2s ease;
 }
 
-#controls input:focus,
-#controls select:focus {
+#filter select:focus {
   outline: none;
   border-color: var(--accent);
 }
 
 #table-container {
   overflow-x: auto;
-}
-
-.hidden {
-  display: none;
-}
-
-#loading-spinner {
-  text-align: center;
-  margin: 2rem 0;
-  font-size: 1.2rem;
-  color: var(--accent);
-}
-
-#no-data-message {
-  text-align: center;
-  margin: 2rem 0;
-  font-size: 1rem;
-  color: var(--text);
 }
 
 table {
@@ -126,6 +106,7 @@ footer a {
   color: var(--accent);
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--background-dark);
