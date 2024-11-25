@@ -4,63 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iOS Signing Status</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>iOS Signing Status</h1>
   </header>
-
   <main>
     <div id="controls">
-      <input type="text" id="search-bar" placeholder="Search devices or versions..." />
+      <input type="text" id="search-bar" placeholder="Search devices or iOS versions..." />
       <select id="device-type">
+        <option value="" disabled selected>Select a Device Type</option>
         <option value="All">All Device Types</option>
       </select>
       <select id="device">
+        <option value="" disabled selected>Select a Device</option>
         <option value="All">All Devices</option>
       </select>
       <select id="ios-version">
+        <option value="" disabled selected>Select iOS Version</option>
         <option value="All">All Versions</option>
       </select>
-      <select id="beta-status">
-        <option value="All">All Status</option>
-      </select>
     </div>
-
-    <!-- Tab buttons -->
-    <div id="tabs">
-      <button class="tab-button active" data-tab="stable">Stable Software</button>
-      <button class="tab-button" data-tab="beta">Beta Software</button>
-      <button class="tab-button" data-tab="ota">OTA Profiles</button>
-    </div>
-
-    <!-- Table to display signing status -->
-    <div id="loading-spinner" class="hidden">Loading...</div>
-    <div id="no-data-message" class="hidden">No data available.</div>
-
     <div id="table-container">
+      <div id="loading-spinner" class="hidden">Loading...</div>
       <table>
         <thead>
           <tr>
             <th>Device</th>
             <th>iOS Version</th>
-            <th>Status</th>
-            <th>Beta</th>
-            <th>OTA Profile</th>
+            <th>Signing Status</th>
             <th>Download</th>
           </tr>
         </thead>
         <tbody id="status-table">
-          <!-- Data rows will be inserted here -->
+          <!-- Data will be dynamically injected here -->
         </tbody>
       </table>
+      <div id="no-data-message" class="hidden">No results found. Try a different filter or search.</div>
     </div>
-
-    <!-- Pagination controls -->
-    <div id="pagination"></div>
   </main>
-
+  <footer>
+    <p>Data powered by <a href="https://ipsw.me" target="_blank">IPSW.me</a></p>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
