@@ -11,15 +11,23 @@
     <h1>iOS Signing Status</h1>
   </header>
   <main>
-    <div id="filter">
+    <div id="controls">
+      <input type="text" id="search-bar" placeholder="Search devices or iOS versions..." />
+      <select id="device-type">
+        <option value="" disabled selected>Select a Device Type</option>
+        <option value="All">All Device Types</option>
+      </select>
       <select id="device">
+        <option value="" disabled selected>Select a Device</option>
         <option value="All">All Devices</option>
       </select>
       <select id="ios-version">
+        <option value="" disabled selected>Select iOS Version</option>
         <option value="All">All Versions</option>
       </select>
     </div>
     <div id="table-container">
+      <div id="loading-spinner" class="hidden">Loading...</div>
       <table>
         <thead>
           <tr>
@@ -33,6 +41,7 @@
           <!-- Data will be dynamically injected here -->
         </tbody>
       </table>
+      <div id="no-data-message" class="hidden">No results found. Try a different filter or search.</div>
     </div>
   </main>
   <footer>
