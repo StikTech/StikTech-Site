@@ -161,6 +161,7 @@ async function init() {
   const data = await fetchSigningData();
   populateFilters(data);
 
+  // Set up tab click event listeners
   const tabButtons = document.querySelectorAll(".tab-button");
   tabButtons.forEach(button => button.addEventListener("click", handleTabClick));
 
