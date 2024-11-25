@@ -1,93 +1,120 @@
-/* General styles */
-:root {
-  --background-light: #f5f5f7;
-  --background-dark: #1d1d1f;
-  --text-light: #1c1c1e;
-  --text-dark: #f5f5f7;
-  --accent: #007aff;
-  --border-light: #d2d2d7;
-  --border-dark: #3a3a3c;
-
-  --background: var(--background-light);
-  --text: var(--text-light);
-  --border: var(--border-light);
+/* General Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
   margin: 0;
-  padding: 0;
-  background-color: #1c1c1e;
-  color: #f4f4f4;
 }
 
 header {
-  background-color: #333;
-  padding: 1rem;
   text-align: center;
+  margin-top: 20px;
 }
 
 h1 {
-  color: #fff;
+  font-size: 2rem;
+  color: #f1f1f1;
 }
 
-/* Controls */
+main {
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #1f1f1f;
+  border-radius: 8px;
+}
+
 #controls {
   display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-#controls input, #controls select {
-  padding: 8px;
-  margin-right: 10px;
-  background-color: #2c2c2e;
-  border: none;
-  border-radius: 5px;
-  color: #f4f4f4;
+#controls input,
+#controls select {
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #fff;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 1rem;
 }
 
-button {
-  background-color: #0071e3;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
+#tabs {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background-color: #333;
+  border: 1px solid #444;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-button:hover {
-  background-color: #005bb5;
+.tab-button.active {
+  background-color: #1e90ff;
 }
 
-/* Table Styling */
+#table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
   background-color: #333;
+  border-radius: 8px;
 }
 
-table th, table td {
+th, td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
 }
 
 th {
   background-color: #444;
+  font-weight: bold;
 }
 
-tr:nth-child(even) {
-  background-color: #444;
+tr:hover {
+  background-color: #555;
 }
 
+a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Loading Spinner */
 #loading-spinner {
-  text-align: center;
-  font-size: 20px;
-  color: #0071e3;
+  display: block;
+  margin: 0 auto;
+  color: #f1f1f1;
 }
 
 .hidden {
@@ -96,53 +123,43 @@ tr:nth-child(even) {
 
 #no-data-message {
   text-align: center;
-  padding: 20px;
-  font-size: 18px;
-  color: #f4f4f4;
+  color: #f1f1f1;
 }
 
-/* Privacy Policy Modal */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed;
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black with opacity */
-  padding-top: 60px;
+/* Filter Active State */
+select:focus, input:focus {
+  outline: 2px solid #1e90ff;
 }
 
-.modal-content {
-  background-color: #1c1c1e;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 10px;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
+select option:checked {
+  background-color: #1e90ff;
   color: white;
-  text-decoration: none;
-  cursor: pointer;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 20px;
-  color: #aaa;
+/* Responsive Design */
+@media (max-width: 768px) {
+  #controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #controls input,
+  #controls select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  table th, table td {
+    padding: 8px;
+  }
+
+  #controls input,
+  #controls select {
+    font-size: 0.9rem;
+  }
 }
