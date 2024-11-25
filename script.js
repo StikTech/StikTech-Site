@@ -199,5 +199,15 @@ async function init() {
   console.log("Application initialized successfully.");
 }
 
+// Show privacy policy modal
+document.getElementById("privacy-policy-btn").addEventListener("click", () => {
+  document.getElementById("privacy-policy-modal").classList.remove("hidden");
+});
+
+// Close privacy policy modal
+document.getElementById("close-btn").addEventListener("click", () => {
+  document.getElementById("privacy-policy-modal").classList.add("hidden");
+});
+
 // Start the app
 init();
