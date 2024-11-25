@@ -1,108 +1,113 @@
-/* General Styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* General styles */
+:root {
+  --background-light: #f5f5f7;
+  --background-dark: #1d1d1f;
+  --text-light: #1c1c1e;
+  --text-dark: #f5f5f7;
+  --accent: #007aff;
+  --border-light: #d2d2d7;
+  --border-dark: #3a3a3c;
+
+  --background: var(--background-light);
+  --text: var(--text-light);
+  --border: var(--border-light);
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #121212;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
   margin: 0;
+  padding: 0;
+  background-color: var(--background);
+  color: var(--text);
+  transition: all 0.3s ease-in-out;
 }
 
 header {
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
   text-align: center;
-  margin-top: 20px;
-}
-
-h1 {
-  font-size: 2rem;
-  color: #f1f1f1;
+  padding: 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 main {
-  width: 90%;
-  max-width: 1200px;
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #1f1f1f;
-  border-radius: 8px;
+  padding: 1rem;
 }
 
 #controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 #controls input,
 #controls select {
-  padding: 10px;
-  border: 1px solid #333;
-  background-color: #222;
-  color: #fff;
-  border-radius: 4px;
-  width: 200px;
   font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--background);
+  color: var(--text);
+  transition: border-color 0.2s ease;
 }
 
-#tabs {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.tab-button {
-  padding: 10px 20px;
-  background-color: #333;
-  border: 1px solid #444;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.tab-button.active {
-  background-color: #1e90ff;
+#controls input:focus,
+#controls select:focus {
+  outline: none;
+  border-color: var(--accent);
 }
 
 #table-container {
   overflow-x: auto;
-  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#loading-spinner {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+#no-data-message {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1rem;
+  color: var(--text);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #333;
+  background-color: var(--background);
+  border: 1px solid var(--border);
   border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
-  padding: 12px;
+  padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--border);
 }
 
 th {
-  background-color: #444;
-  font-weight: bold;
+  background-color: var(--background);
+  font-weight: 700;
 }
 
 tr:hover {
-  background-color: #555;
+  background-color: var(--border-light);
 }
 
 a {
-  color: #1e90ff;
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -110,56 +115,21 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Loading Spinner */
-#loading-spinner {
-  display: block;
-  margin: 0 auto;
-  color: #f1f1f1;
-}
-
-.hidden {
-  display: none;
-}
-
-#no-data-message {
+footer {
   text-align: center;
-  color: #f1f1f1;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
 }
 
-/* Filter Active State */
-select:focus, input:focus {
-  outline: 2px solid #1e90ff;
+footer a {
+  color: var(--accent);
 }
 
-select option:checked {
-  background-color: #1e90ff;
-  color: white;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  #controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #controls input,
-  #controls select {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  table th, table td {
-    padding: 8px;
-  }
-
-  #controls input,
-  #controls select {
-    font-size: 0.9rem;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --border: var(--border-dark);
   }
 }
