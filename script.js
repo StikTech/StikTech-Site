@@ -3,7 +3,6 @@ async function fetchSigningData() {
   const spinner = document.getElementById("loading-spinner");
   const noDataMessage = document.getElementById("no-data-message");
 
-  // Show the loading spinner while fetching data
   spinner.classList.remove("hidden");
   noDataMessage.classList.add("hidden");
 
@@ -27,6 +26,7 @@ async function fetchSigningData() {
         firmwareData.firmwares.forEach(firmware => {
           signingData.push({
             device: firmwareData.name,
+            deviceType: firmwareData.identifier.split(",")[0], // Use identifier for type grouping
             iosVersion: firmware.version,
             status: firmware.signed ? "Signed" : "Not Signed",
             downloadUrl: firmware.url,
@@ -52,21 +52,23 @@ async function fetchSigningData() {
 
 // Populate dropdown filters
 function populateFilters(data) {
+  const deviceTypeSelect = document.getElementById("device-type");
   const deviceSelect = document.getElementById("device");
   const versionSelect = document.getElementById("ios-version");
 
-  const deviceSet = new Set(data.map(item => item.device));
+  const deviceTypeSet = new Set(data.map(item => item.deviceType));
   const versionSet = new Set(data.map(item => item.iosVersion));
 
-  // Clear and repopulate dropdowns
+  // Clear and populate dropdowns
+  deviceTypeSelect.innerHTML = `<option value="All">All Device Types</option>`;
   deviceSelect.innerHTML = `<option value="All">All Devices</option>`;
   versionSelect.innerHTML = `<option value="All">All Versions</option>`;
 
-  deviceSet.forEach(device => {
+  deviceTypeSet.forEach(type => {
     const option = document.createElement("option");
-    option.value = device;
-    option.textContent = device;
-    deviceSelect.appendChild(option);
+    option.value = type;
+    option.textContent = type;
+    deviceTypeSelect.appendChild(option);
   });
 
   versionSet.forEach(version => {
@@ -77,23 +79,43 @@ function populateFilters(data) {
   });
 }
 
+// Update devices dropdown based on the selected device type
+function updateDeviceDropdown(data, selectedType) {
+  const deviceSelect = document.getElementById("device");
+  deviceSelect.innerHTML = `<option value="All">All Devices</option>`;
+
+  const filteredDevices = new Set(
+    data
+      .filter(item => selectedType === "All" || item.deviceType === selectedType)
+      .map(item => item.device)
+  );
+
+  filteredDevices.forEach(device => {
+    const option = document.createElement("option");
+    option.value = device;
+    option.textContent = device;
+    deviceSelect.appendChild(option);
+  });
+}
+
 // Render the table based on data and filters
-function renderTable(data, searchQuery = "", deviceFilter = "All", versionFilter = "All") {
+function renderTable(data, searchQuery = "", deviceTypeFilter = "All", deviceFilter = "All", versionFilter = "All") {
   const tableBody = document.getElementById("status-table");
   const noDataMessage = document.getElementById("no-data-message");
 
   tableBody.innerHTML = ""; // Clear table
-  noDataMessage.classList.add("hidden"); // Hide no-data message
+  noDataMessage.classList.add("hidden");
 
-  // Filter data based on search and dropdowns
   const filteredData = data.filter(item => {
+    const matchesDeviceType =
+      deviceTypeFilter === "All" || item.deviceType === deviceTypeFilter;
     const matchesDevice = deviceFilter === "All" || item.device === deviceFilter;
     const matchesVersion = versionFilter === "All" || item.iosVersion === versionFilter;
     const matchesSearch =
       !searchQuery ||
       item.device.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.iosVersion.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesDevice && matchesVersion && matchesSearch;
+    return matchesDeviceType && matchesDevice && matchesVersion && matchesSearch;
   });
 
   if (filteredData.length === 0) {
@@ -102,7 +124,6 @@ function renderTable(data, searchQuery = "", deviceFilter = "All", versionFilter
     return;
   }
 
-  // Populate table with filtered data
   filteredData.forEach(item => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -128,21 +149,51 @@ async function init() {
   populateFilters(data);
   renderTable(data);
 
-  // Event listeners for search and dropdown filters
+  // Event listeners for filtering
   const searchBar = document.getElementById("search-bar");
+  const deviceTypeSelect = document.getElementById("device-type");
   const deviceSelect = document.getElementById("device");
   const versionSelect = document.getElementById("ios-version");
 
   searchBar.addEventListener("input", () =>
-    renderTable(data, searchBar.value, deviceSelect.value, versionSelect.value)
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
   );
 
+  deviceTypeSelect.addEventListener("change", () => {
+    updateDeviceDropdown(data, deviceTypeSelect.value);
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    );
+  });
+
   deviceSelect.addEventListener("change", () =>
-    renderTable(data, searchBar.value, deviceSelect.value, versionSelect.value)
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
   );
 
   versionSelect.addEventListener("change", () =>
-    renderTable(data, searchBar.value, deviceSelect.value, versionSelect.value)
+    renderTable(
+      data,
+      searchBar.value,
+      deviceTypeSelect.value,
+      deviceSelect.value,
+      versionSelect.value
+    )
   );
 
   console.log("Application initialized successfully.");
