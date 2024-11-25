@@ -1,113 +1,108 @@
-/* General styles */
-:root {
-  --background-light: #f5f5f7;
-  --background-dark: #1d1d1f;
-  --text-light: #1c1c1e;
-  --text-dark: #f5f5f7;
-  --accent: #007aff;
-  --border-light: #d2d2d7;
-  --border-dark: #3a3a3c;
-
-  --background: var(--background-light);
-  --text: var(--text-light);
-  --border: var(--border-light);
+/* General Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
   margin: 0;
-  padding: 0;
-  background-color: var(--background);
-  color: var(--text);
-  transition: all 0.3s ease-in-out;
 }
 
 header {
-  background-color: var(--background);
-  border-bottom: 1px solid var(--border);
   text-align: center;
-  padding: 1.5rem 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+  margin-top: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #f1f1f1;
 }
 
 main {
-  padding: 1rem;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #1f1f1f;
+  border-radius: 8px;
 }
 
 #controls {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 #controls input,
 #controls select {
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #fff;
+  border-radius: 4px;
+  width: 200px;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background-color: var(--background);
-  color: var(--text);
-  transition: border-color 0.2s ease;
 }
 
-#controls input:focus,
-#controls select:focus {
-  outline: none;
-  border-color: var(--accent);
+#tabs {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background-color: #333;
+  border: 1px solid #444;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.tab-button.active {
+  background-color: #1e90ff;
 }
 
 #table-container {
   overflow-x: auto;
-}
-
-.hidden {
-  display: none;
-}
-
-#loading-spinner {
-  text-align: center;
-  margin: 2rem 0;
-  font-size: 1.2rem;
-  color: var(--accent);
-}
-
-#no-data-message {
-  text-align: center;
-  margin: 2rem 0;
-  font-size: 1rem;
-  color: var(--text);
+  margin-top: 20px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: var(--background);
-  border: 1px solid var(--border);
+  background-color: #333;
   border-radius: 8px;
-  overflow: hidden;
 }
 
 th, td {
-  padding: 0.75rem 1rem;
+  padding: 12px;
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #444;
 }
 
 th {
-  background-color: var(--background);
-  font-weight: 700;
+  background-color: #444;
+  font-weight: bold;
 }
 
 tr:hover {
-  background-color: var(--border-light);
+  background-color: #555;
 }
 
 a {
-  color: var(--accent);
+  color: #1e90ff;
   text-decoration: none;
 }
 
@@ -115,21 +110,56 @@ a:hover {
   text-decoration: underline;
 }
 
-footer {
+/* Loading Spinner */
+#loading-spinner {
+  display: block;
+  margin: 0 auto;
+  color: #f1f1f1;
+}
+
+.hidden {
+  display: none;
+}
+
+#no-data-message {
   text-align: center;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  border-top: 1px solid var(--border);
+  color: #f1f1f1;
 }
 
-footer a {
-  color: var(--accent);
+/* Filter Active State */
+select:focus, input:focus {
+  outline: 2px solid #1e90ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--background-dark);
-    --text: var(--text-dark);
-    --border: var(--border-dark);
+select option:checked {
+  background-color: #1e90ff;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #controls input,
+  #controls select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  table th, table td {
+    padding: 8px;
+  }
+
+  #controls input,
+  #controls select {
+    font-size: 0.9rem;
   }
 }
